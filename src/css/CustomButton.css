@@ -1,0 +1,12 @@
+.button-container {
+    color: var(--text);
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--secondary);
+    cursor: pointer;
+}
+
+.button-container:hover {
+    background-color: var(--secondary-variant);
+}
