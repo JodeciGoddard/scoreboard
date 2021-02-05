@@ -77,3 +77,25 @@ export function logUserOut() {
         console.log("failed to sign user out: ", error);
     });
 }
+
+export function addGame(userID, data, success, fail) {
+    const db = firebase.firestore();
+
+    db.collection('users')
+        .doc(userID)
+        .collection('games')
+        .add(
+            {
+                ...data,
+                timestamp: new Date().toLocaleDateString()
+            }
+        ).then(() => {
+            success()
+        }).catch((error) => {
+            fail(error);
+        });
+}
+
+export function getDB() {
+    return firebase.firestore();
+}

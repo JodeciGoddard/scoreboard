@@ -1,0 +1,17 @@
+.fb-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+
+    font-size: 30px;
+    background-color: var(--primary);
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.fb-container:hover {
+    background-color: var(--primary-variant);
+}

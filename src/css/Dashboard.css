@@ -1,5 +1,6 @@
 .dash-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     flex: 1;
 

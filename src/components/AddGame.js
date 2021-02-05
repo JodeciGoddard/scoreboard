@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import '../css/AddGame.css';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import CustomButton from './CustomButton';
+import { addGame } from '../api/Firebase';
+import { userToken } from '../State';
+import { useRecoilState } from 'recoil';
 
 const AddGame = ({ onClose }) => {
     const [name, setName] = useState('');
@@ -11,8 +14,13 @@ const AddGame = ({ onClose }) => {
     const [first, setFirst] = useState(false);
     const [last, setLast] = useState(false);
 
+    const [user, setUser] = useRecoilState(userToken);
+
+    const [error, setError] = useState('');
+
     const updateName = (e) => {
         setName(e.target.value);
+        setError('');
     }
 
     const closeDialog = () => {
@@ -20,6 +28,7 @@ const AddGame = ({ onClose }) => {
     }
 
     const selectRadioButton = num => {
+        setError('');
         setHighest(false);
         setLowest(false);
         setFirst(false);
@@ -28,6 +37,34 @@ const AddGame = ({ onClose }) => {
         if (num === 1) setLowest(true);
         if (num === 2) setFirst(true);
         if (num === 3) setLast(true);
+    }
+
+    const add = () => {
+        if (name.trim() === '') {
+            setError("Please enter a name.");
+            return;
+        }
+
+        let type = 'Highest Score';
+
+        if (lowest) type = 'Lowest Score';
+        if (first) type = 'First to Score';
+        if (last) type = 'Last to Score';
+
+        const data = {
+            name: name,
+            type: type
+        }
+
+        //add the game
+        addGame(user.uid, data, () => {
+            console.log("Game successfully added");
+            onClose();
+        }, (error) => {
+            console.log("Error:: ", error);
+            setError(error.code);
+        });
+
     }
 
     return (
@@ -66,7 +103,11 @@ const AddGame = ({ onClose }) => {
                     </div>
                 </div>
 
-                <CustomButton className="add-button" width="80%">Add</CustomButton>
+                {error !== '' ? <div className="add-error">
+                    <p >{error}</p>
+                </div> : null}
+
+                <CustomButton onClick={add} className="add-button" width="80%">Add</CustomButton>
             </div>
         </div>
     );

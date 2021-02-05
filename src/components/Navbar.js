@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import '../css/Navbar.css';
 import { userToken } from '../State';
 import { useRecoilState } from 'recoil';
@@ -10,6 +10,13 @@ const Navbar = () => {
     const [user, setUser] = useRecoilState(userToken);
 
     const location = useLocation();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (user === 'none') {
+            history.push('/');
+        }
+    }, []);
 
     let path = location.pathname;
     path = path.replace("/", "");

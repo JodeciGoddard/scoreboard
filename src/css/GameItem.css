@@ -1,0 +1,49 @@
+.g-container {
+    display: flex;
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    flex-direction: column;
+
+    justify-content: center;
+    
+    
+    background-color: var(--background-alt);
+
+    cursor: pointer;
+}
+
+.g-header {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    justify-content: center;
+    padding: 3px;
+    border-bottom: 1px solid var(--background);
+}
+
+.g-header > h3{
+    color: var(--primary);
+    margin: 0;
+}
+
+.g-delete {
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: var(--primary-variant);
+    cursor: pointer;
+}
+
+.g-delete:hover {
+    color: var(--text);
+}
+
+.g-timestamp {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    font-size: 0.7rem;
+    color: var(--primary-variant);
+}
