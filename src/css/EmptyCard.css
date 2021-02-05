@@ -1,0 +1,39 @@
+.ecard-container {
+    display: flex;
+    width: 80%;
+    height: 150px;
+
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: rgb(83, 83, 83);
+
+    cursor: pointer;
+}
+
+.ecard-icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: rgb(104, 104, 104);
+}
+
+.ecard-container:hover {
+    background-color: rgb(167, 167, 167);
+}
+
+.ecard-icon-container:hover {
+    background-color: black;
+}
+
+
+
+.ecard-icon {
+    font-size: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+    
+  }
