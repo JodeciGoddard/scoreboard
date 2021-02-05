@@ -11,12 +11,14 @@ import { RecoilRoot } from 'recoil';
 import Login from './screens/Login.js';
 import SignUp from './screens/SignUp';
 import Dashboard from './screens/Dashboard';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <RecoilRoot>
       <Router >
         <div className="App">
+          <Navbar />
           <Switch>
             <Login path="/" exact />
             <SignUp path="/SignUp" />

@@ -1,0 +1,25 @@
+.nav-container {
+    display: flex;
+    color: var(--text);
+    background-color: var(--dark);
+}
+
+.nav-container.hide {
+    display: none;
+}
+
+.nav-item {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.nav-item.footer {
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.nav-item.footer:hover {
+    color: #fff;
+}

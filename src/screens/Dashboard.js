@@ -4,7 +4,7 @@ import '../css/Dashboard.css'
 const Dashboard = () => {
     return (
         <div className="dash-container">
-            Dashboard
+            <h4>Games</h4>
         </div>
     );
 }

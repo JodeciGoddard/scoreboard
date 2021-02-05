@@ -69,3 +69,11 @@ export function logUserIn(email, password, fail) {
             fail(error);
         });
 }
+
+export function logUserOut() {
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+    }).catch((error) => {
+        console.log("failed to sign user out: ", error);
+    });
+}

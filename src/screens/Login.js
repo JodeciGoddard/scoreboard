@@ -27,6 +27,7 @@ const Login = () => {
             history.push("/dashboard")
         }, () => {
             console.log("no logged In user");
+            setUser('none');
             history.push("/");
         })
     }, []);

@@ -7,6 +7,7 @@ body{
   --highlight: #ED1A7B;
   --background: #323232;
   --background-alt: #444444;
+  --dark: #0e0e0e;
   --text: #cdcdcd;
   --error: rgb(231, 29, 29);
 }
