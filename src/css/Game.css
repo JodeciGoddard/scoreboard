@@ -9,3 +9,36 @@
     color: var(--text);
     background-color: var(--background);
 }
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: var(--background-alt);
+    padding: 10px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-card > h3 {
+    align-self: center;
+}
+
+.game-card > input {
+    margin: 5px;
+    padding: 5px;
+    outline: none;
+    border: 1px solid var(--background);
+    background-color: var(--background);
+    color: var(--text);
+}
+
+ .add-btn {
+     margin: 10px;
+    align-self: center;
+}
+
+.game-card > input:focus {
+    border: 1px solid var(--highlight);
+}

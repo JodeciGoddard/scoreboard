@@ -1,0 +1,10 @@
+.player-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: var(--background-alt);
+    padding: 10px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
