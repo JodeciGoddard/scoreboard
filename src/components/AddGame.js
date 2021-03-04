@@ -53,7 +53,9 @@ const AddGame = ({ onClose }) => {
 
         const data = {
             name: name,
-            type: type
+            type: type,
+            players: [],
+            leader: 'none',
         }
 
         //add the game

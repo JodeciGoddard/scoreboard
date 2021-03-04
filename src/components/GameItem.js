@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/GameItem.css';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
-const GameItem = ({ data, onDelete }) => {
+const GameItem = ({ data, onDelete, onClick }) => {
 
     const remove = () => {
         var answer = window.confirm("Are you sure you wish to delete?")
@@ -14,7 +14,7 @@ const GameItem = ({ data, onDelete }) => {
     }
 
     return (
-        <div className="g-container">
+        <div className="g-container" onClick={() => { onClick(data.id) }}>
             <div className="g-header">
                 <h3>{data.name}</h3>
                 <RiDeleteBin6Line className="g-delete" onClick={remove} />
@@ -22,7 +22,7 @@ const GameItem = ({ data, onDelete }) => {
 
             <div>
                 <p>Type: {data.type}</p>
-                <p>Players: {data.players ? data.players : 0}</p>
+                <p>Players: {data.players ? data.players.length : 0}</p>
                 <p>Leader: {data.leader ? data.leader : "None"}</p>
 
                 <p className="g-timestamp">{data.timestamp}</p>

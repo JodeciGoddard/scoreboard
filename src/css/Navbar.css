@@ -1,4 +1,5 @@
 .nav-container {
+    position: relative;
     display: flex;
     color: var(--text);
     background-color: var(--dark);
@@ -15,8 +16,13 @@
     padding: 5px;
 }
 
+.nav-item.header {
+    justify-content: center;
+}
+
 .nav-item.footer {
-    margin-right: 4px;
+    position: absolute;
+    right: 0;
     cursor: pointer;
 }
 

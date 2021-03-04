@@ -18,9 +18,15 @@ const Navbar = () => {
         }
     }, []);
 
+
     let path = location.pathname;
+
     path = path.replace("/", "");
     path = path.charAt(0).toUpperCase() + path.slice(1);
+
+    if (path.split("/").length > 1) {
+        path = path.split("/")[0];
+    }
 
     return (
 

@@ -27,6 +27,10 @@
     margin: 0;
 }
 
+.g-header > h3:hover{
+    color: var(--primary-variant);
+}
+
 .g-delete {
     font-size: 20px;
     position: absolute;

@@ -7,6 +7,7 @@ import { userToken } from '../State';
 import { useRecoilState } from 'recoil';
 import GameItem from '../components/GameItem';
 import FloatingButton from '../components/FloatingButton';
+import { useHistory } from 'react-router-dom';
 
 
 const Dashboard = () => {
@@ -15,6 +16,11 @@ const Dashboard = () => {
 
     const [user, setUser] = useRecoilState(userToken);
 
+    let history = useHistory();
+
+    const gameClick = (id) => {
+        history.push('/game/' + id);
+    }
 
     useEffect(() => {
         const unsubscribe = getDB().collection('users')
@@ -62,7 +68,7 @@ const Dashboard = () => {
             {games.length <= 0 ? <EmptyCard onClick={addGame} /> : null}
 
             {games.map(item => {
-                return <GameItem key={item.id} data={item} onDelete={gameDelete} />
+                return <GameItem key={item.id} data={item} onDelete={gameDelete} onClick={gameClick} />
             })}
 
             <FloatingButton onClick={() => { setAddDialog(true) }} />

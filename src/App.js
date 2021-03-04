@@ -12,6 +12,7 @@ import Login from './screens/Login.js';
 import SignUp from './screens/SignUp';
 import Dashboard from './screens/Dashboard';
 import Navbar from './components/Navbar';
+import Game from './screens/Game';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
             <Login path="/" exact />
             <SignUp path="/SignUp" />
             <Dashboard path="/dashboard" />
+            <Route path="/game/:id">
+              <Game />
+            </Route>
           </Switch>
         </div>
 
