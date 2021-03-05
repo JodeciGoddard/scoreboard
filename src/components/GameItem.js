@@ -4,13 +4,15 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const GameItem = ({ data, onDelete, onClick }) => {
 
-    const remove = () => {
+    const remove = (e) => {
         var answer = window.confirm("Are you sure you wish to delete?")
         if (answer) {
             onDelete(data.id);
         } else {
             return;
         }
+
+        e.stopPropagation()
     }
 
     return (

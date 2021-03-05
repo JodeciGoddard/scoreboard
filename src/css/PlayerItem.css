@@ -7,4 +7,86 @@
     margin: 10px;
     margin-left: auto;
     margin-right: auto;
+
+    font-family: var(--alt-font);
 }
+
+.player-name {
+    display: flex;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.player-name > h4 {
+    flex: 1;
+    margin: 5px;
+}
+
+.player-cs {
+    margin: 5px;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+}
+
+.player-cs > p {
+    font-family: var(--secondary-font);
+    margin: 5px
+}
+
+.player-rounds > h4 {
+    margin: 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.player-icon {
+    color: var(--primary);
+    padding: 5px;
+    font-size: 2rem;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    margin-left: 15px;
+}
+
+.player-icon:hover {
+    color: var(--background-alt);
+    border-color: var(--background-alt);
+    background-color: var(--primary);
+}
+
+.player-scores {
+    display: flex;
+    overflow: scroll;
+}
+
+.player-list {
+    min-width: 100px;
+}
+
+.player-list > h4 {
+    margin-top: 0;
+    margin-bottom: 0px;
+    border: 1px solid #ccc ;
+    border-top: none;
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.player-list > p {
+    font-family: var(--secondary-font);
+    margin: 0;
+    border: 1px solid #ccc ;
+    border-top: none;
+    padding: 3px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .player-list {
+        min-width: 60px;
+        font-size: 0.9rem;
+    }
+  }

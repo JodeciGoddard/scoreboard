@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
 body{
 
   --primary: #B123E0;
@@ -10,6 +13,9 @@ body{
   --dark: #0e0e0e;
   --text: #cdcdcd;
   --error: rgb(231, 29, 29);
+
+  --secondary-font:'Montserrat', sans-serif;
+  --alt-font: 'Indie Flower', cursive;
 }
 
 

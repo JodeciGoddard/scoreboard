@@ -21,8 +21,23 @@
     margin-right: auto;
 }
 
-.game-card > h3 {
-    align-self: center;
+.game-card-heading {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.game-card-heading > h3 {
+    flex: 1;
+    text-align: center;
+    margin: 5px;
+}
+
+.game-icon {
+    position: absolute;
+    right: 0;
+    font-size: 1.5rem;
+    margin: 10px;
 }
 
 .game-card > input {
@@ -32,13 +47,36 @@
     border: 1px solid var(--background);
     background-color: var(--background);
     color: var(--text);
+    transition: all 0.2s ease-out;
 }
 
  .add-btn {
      margin: 10px;
     align-self: center;
+    transition: all 0.2s ease-out;
 }
 
 .game-card > input:focus {
     border: 1px solid var(--highlight);
+}
+
+.hide-item {
+    max-height: 0;
+    opacity: 0;
+    line-height: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+input.hide-item, .add-btn.hide-item, p.hide-item{
+    transition: all 0.2s ease-out;
+}
+
+.game-info {
+    transition: all 0.2s ease-out;
+}
+
+.game-info > p {
+    transition: all 0.2s ease-out;
 }

@@ -6,6 +6,8 @@ import { getDB } from '../api/Firebase';
 import { useRecoilState } from 'recoil';
 import { userToken } from '../State';
 import PlayerItem from '../components/PlayerItem';
+import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
+import ScoreOverlay from '../components/ScoreOverlay';
 
 const Game = () => {
 
@@ -18,9 +20,19 @@ const Game = () => {
     const [update, setUpdate] = useState(false);
     const [user, setUser] = useRecoilState(userToken);
 
+    const [expanded, setExpanded] = useState(true);
+    const [showInfo, setShowInfo] = useState(false);
+    const [overlay, setOverlay] = useState(-1);
+
     let { id } = useParams();
 
+    const toggleExpanded = () => {
+        setExpanded(!expanded);
+    }
 
+    const toggleInfo = () => {
+        setShowInfo(!showInfo);
+    }
 
     const updateName = (e) => {
         setName(e.target.value);
@@ -39,9 +51,13 @@ const Game = () => {
         ref.get().then(doc => {
             if (doc.exists) {
                 let data = doc.data();
-                setPlayers(data.players);
-                setGameType(data.type);
-                setLeader(data.leader);
+                if (data.players) setPlayers(data.players);
+                if (data.type) setGameType(data.type);
+                if (data.leader) setLeader(data.leader);
+
+                if (data.players.length > 0) {
+                    setExpanded(false);
+                }
             } else {
                 console.log("User id: ", user.uid);
                 console.log("game not found id:", id);
@@ -51,6 +67,7 @@ const Game = () => {
         });
 
     }, []);
+
 
     useEffect(() => {
         if (update) {
@@ -88,7 +105,7 @@ const Game = () => {
     }
 
     const getPlayerID = () => {
-        if (players.length <= 0) {
+        if (!players || players.length <= 0) {
             return 0;
         }
 
@@ -103,18 +120,82 @@ const Game = () => {
 
     }
 
+    const removePlayer = (id) => {
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].id === id) {
+                let newarray = [...players];
+                newarray.splice(i, 1);
+                setPlayers(newarray);
+                setUpdate(true);
+            }
+        }
+    }
+
+    const addRound = (id, score) => {
+        //get the right player
+        let nPlayer = {};
+        let i = 0;
+        for (i = 0; i < players.length; i++) {
+            if (players[i].id === id) {
+                nPlayer = { ...players[i] }
+                break;
+            }
+        }
+
+        //add the rounds
+        let rounds = [];
+        if (nPlayer.rounds) {
+            nPlayer.rounds.push(parseInt(score));
+        } else {
+            rounds = [parseInt(score)];
+            nPlayer = { ...nPlayer, rounds: rounds };
+        }
+
+
+        //calculate the players score
+        let total = parseInt(nPlayer.score);
+        total += parseInt(score);
+
+        nPlayer = { ...nPlayer, score: total }
+
+        let newPlayers = [...players];
+        newPlayers[i] = nPlayer;
+
+        setPlayers(newPlayers);
+        setUpdate(true);
+
+    }
+
     return (
         <div className="game-container">
+
+            {overlay >= 0 ? <ScoreOverlay id={overlay} onClose={() => { setOverlay(-1) }} getScore={addRound} /> : null}
+
             <div className="game-card">
-                <h3>Add Player</h3>
-                <input type="text" placeholder="Player name" onChange={updateName} value={name} />
-                <input type="number" placeholder="initial score" onChange={updateInitScore} value={initScore} />
-                <CustomButton className="add-btn" width="50%" onClick={addPlayer}>Add</CustomButton>
+                <div className="game-card-heading">
+                    <h3>Add Player</h3>
+                    {expanded ? <AiFillMinusCircle className="game-icon" onClick={toggleExpanded} /> : <AiFillPlusCircle className="game-icon" onClick={toggleExpanded} />}
+                </div>
+                <input type="text" placeholder="Player name" onChange={updateName} value={name} className={expanded ? "" : "hide-item"} />
+                <input type="number" placeholder="initial score" onChange={updateInitScore} value={initScore} className={expanded ? "" : "hide-item"} />
+                <CustomButton className={expanded ? "add-btn" : "add-btn hide-item"} width="50%" onClick={addPlayer}>Add</CustomButton>
             </div>
 
-            {players.map(item => {
+            <div className="game-card">
+                <div className="game-card-heading">
+                    <h3>Game Info</h3>
+                    {showInfo ? <AiFillMinusCircle className="game-icon" onClick={toggleInfo} /> : <AiFillPlusCircle className="game-icon" onClick={toggleInfo} />}
+                </div>
+                <div className="game-info">
+                    <p className={showInfo ? "" : "hide-item"}>Game Type: <span>{gameType}</span></p>
+                    <p className={showInfo ? "" : "hide-item"}>Game Leader: <span>{leader}</span> </p>
+                </div>
+
+            </div>
+
+            {players && players.map(item => {
                 return (
-                    <PlayerItem key={item.id} />
+                    <PlayerItem key={item.id} data={item} onRemove={removePlayer} onAdd={setOverlay} />
                 );
             })}
         </div>
