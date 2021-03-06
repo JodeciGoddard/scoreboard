@@ -71,6 +71,9 @@ const Game = () => {
 
     useEffect(() => {
         if (update) {
+
+            calculateLeader();
+
             let data = {
                 leader: leader,
                 players: players
@@ -166,6 +169,33 @@ const Game = () => {
 
     }
 
+    const calculateLeader = () => {
+        if (!players || players.length <= 0) {
+            setLeader('none');
+            return;
+        }
+
+        let newLeader;
+        for (let i = 0; i < players.length; i++) {
+            if (i === 0) {
+                newLeader = players[i];
+                continue;
+            }
+            if (gameType === 'Highest Score' || gameType === 'First to Score') {
+                if (players[i].score > newLeader.score) newLeader = players[i];
+                continue;
+            }
+
+            if (gameType === 'Lowest Score' || gameType === 'Last to Score') {
+                if (players[i].score < newLeader.score) newLeader = players[i];
+                continue;
+            }
+        }
+
+        console.log("leader changed");
+        setLeader(newLeader);
+    }
+
     return (
         <div className="game-container">
 
@@ -188,7 +218,7 @@ const Game = () => {
                 </div>
                 <div className="game-info">
                     <p className={showInfo ? "" : "hide-item"}>Game Type: <span>{gameType}</span></p>
-                    <p className={showInfo ? "" : "hide-item"}>Game Leader: <span>{leader}</span> </p>
+                    <p className={showInfo ? "" : "hide-item"}>Game Leader: <span>{leader === 'none' ? 'none' : leader.name}</span> </p>
                 </div>
 
             </div>

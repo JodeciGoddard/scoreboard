@@ -25,7 +25,7 @@ const GameItem = ({ data, onDelete, onClick }) => {
             <div>
                 <p>Type: {data.type}</p>
                 <p>Players: {data.players ? data.players.length : 0}</p>
-                <p>Leader: {data.leader ? data.leader : "None"}</p>
+                <p>Leader: {data.leader ? data.leader.name : "None"}</p>
 
                 <p className="g-timestamp">{data.timestamp}</p>
             </div>
